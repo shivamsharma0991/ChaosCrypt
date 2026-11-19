@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Int-WINN-Chaos Image Encryption</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Int-WINN-Chaos</h1>
+    <p>Lossless image encryption: integer wavelet, hyperchaotic keystream, INN coupling layers, RSA key envelope.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Keys -->
+  <section class="card">
+    <div class="card-head">
+      <h2>1. Keys</h2>
+      <button id="genKeys" class="btn">Generate RSA-2048 key pair</button>
+    </div>
+    <p class="hint">The public key encrypts; the private key decrypts. Keys live only in this page. Download the private key and keep it safe.</p>
+    <div class="grid2">
+      <label>Public key (PEM)
+        <textarea id="pubKey" rows="5" spellcheck="false" placeholder="-----BEGIN PUBLIC KEY-----"></textarea>
+        <button class="btn ghost small" data-dl="pubKey" data-name="public_key.pem">Download</button>
+      </label>
+      <label>Private key (PEM)
+        <textarea id="privKey" rows="5" spellcheck="false" placeholder="-----BEGIN PRIVATE KEY-----"></textarea>
+        <button class="btn ghost small" data-dl="privKey" data-name="private_key.pem">Download</button>
+      </label>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="enc" role="tab">Encrypt</button>
+    <button class="tab" data-tab="dec" role="tab">Decrypt</button>
+  </nav>
+
+  <!-- Encrypt -->
+  <section id="tab-enc" class="card">
+    <h2>2. Encrypt an image</h2>
+    <label class="drop" id="dropEnc">
+      <input type="file" id="imgFile" accept="image/*" hidden>
+      <span id="dropEncText">Click or drop an image (PNG, JPG, BMP; up to about 1024x1024)</span>
+    </label>
+    <div class="row">
+      <label class="check"><input type="checkbox" id="analyze" checked> Compute security metrics (entropy, correlation, NPCR/UACI)</label>
+      <button id="encBtn" class="btn primary">Encrypt</button>
+    </div>
+    <div id="encErr" class="msg error" hidden></div>
+    <div id="encOut" hidden>
+      <div class="grid2 imgs">
+        <figure><figcaption>Original</figcaption><img id="origImg" alt="Original"></figure>
+        <figure><figcaption>Encrypted (low byte view)</figcaption><img id="encImg" alt="Encrypted"></figure>
+      </div>
+      <div class="row">
+        <span id="encInfo" class="hint"></span>
+        <span class="spacer"></span>
+        <button id="dlPkg" class="btn">Download .enc package</button>
+        <button id="toDec" class="btn ghost">Use in Decrypt tab</button>
+      </div>
+      <div id="metrics" class="metrics"></div>
+    </div>
+  </section>
+
+  <!-- Decrypt -->
+  <section id="tab-dec" class="card" hidden>
+    <h2>3. Decrypt a package</h2>
+    <label class="drop" id="dropDec">
+      <input type="file" id="pkgFile" accept=".enc" hidden>
+      <span id="dropDecText">Click or drop an .enc package</span>
+    </label>
+    <div class="row">
+      <label class="check"><input type="checkbox" id="allowCorrupt"> Decrypt even if the package was damaged</label>
+      <button id="decBtn" class="btn primary">Decrypt</button>
+    </div>
+    <div id="decErr" class="msg error" hidden></div>
+    <div id="decOut" hidden>
+      <div class="badges" id="badges"></div>
+      <figure class="single"><figcaption>Decrypted image</figcaption><img id="decImg" alt="Decrypted"></figure>
+      <div class="row"><span id="decInfo" class="hint"></span><span class="spacer"></span>
+        <button id="dlImg" class="btn">Download PNG</button></div>
+    </div>
+  </section>
+
+  <p class="foot">Research prototype for learning and evaluation. It has not been independently audited; for production secrets use a vetted cipher such as AES-GCM.</p>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
