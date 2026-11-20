@@ -1,12 +1,3 @@
-"""3D Sine-Tent-Cosine hyperchaotic generator with dynamic phase perturbation.
-
-Parameters and initial state are derived from a 32-byte session seed.  The
-phase term (i * phi mod 1) is injected every iteration so the orbit cannot
-settle on a finite-precision fixed point or short cycle.
-
-Note: the stream uses float64 sin/cos, so encrypt and decrypt must run on
-the same platform / libm (true here: same server).
-"""
 import hashlib
 import math
 
