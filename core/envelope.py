@@ -1,8 +1,3 @@
-"""RSA-2048 (OAEP / SHA-256) envelope for the ephemeral session seed, plus the
-.enc container format with an HMAC-SHA256 integrity tag.
-
-Container:  b"IWC1" | uint32 header_len | header JSON | payload | 32-byte HMAC
-"""
 import base64
 import hashlib
 import hmac

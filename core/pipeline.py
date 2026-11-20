@@ -1,10 +1,3 @@
-"""Int-WINN-Chaos pipeline: encrypt / decrypt an (H, W, C) uint8 image.
-
-Encrypt:  pad -> integer wavelet -> 16-bit words -> chaotic permutation
-          -> INN coupling layers -> keystream add + forward/backward
-          cumulative diffusion  ->  16-bit ciphertext
-Decrypt:  exact inverse of every step (bit-exact, PSNR = inf).
-"""
 import hashlib
 import json
 import os

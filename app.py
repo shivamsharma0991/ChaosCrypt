@@ -1,6 +1,3 @@
-"""Flask server: serves the frontend and exposes a small local JSON API that
-connects the UI to the Int-WINN-Chaos pipeline. All crypto runs locally in
-Python; no external or AI service is called."""
 import base64
 import io
 
@@ -10,7 +7,7 @@ from PIL import Image, UnidentifiedImageError
 
 from core import envelope, metrics, pipeline
 
-MAX_PIXELS = 1024 * 1024          # keeps the pure-Python chaos loop responsive
+MAX_PIXELS = 1024 * 1024         
 Image.MAX_IMAGE_PIXELS = 50_000_000
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")

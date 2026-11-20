@@ -1,9 +1,3 @@
-"""Lossless 2D Integer Haar (S-transform) lifting wavelet, Z -> Z.
-
-Layout is Mallat style: after each level the LL band sits in the top-left
-corner and is decomposed again.  Everything is exact integer arithmetic, so
-inverse(forward(x)) == x bit for bit.
-"""
 import numpy as np
 
 

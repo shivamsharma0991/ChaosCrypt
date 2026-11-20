@@ -1,4 +1,3 @@
-"""Standard image-encryption security metrics."""
 import numpy as np
 
 from . import pipeline

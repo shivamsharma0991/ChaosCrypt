@@ -1,10 +1,3 @@
-"""Integer invertible-neural-network additive coupling layers (mod 2**16).
-
-Each layer updates one half of the data with a small integer MLP of the
-other half:   A <- A + F(B)  (mod 65536).   F uses integer weights, ReLU and
-floor (>>) rounding, so it is deterministic and exactly invertible:
-A = A' - F(B).  Weights come from the session seed.
-"""
 import numpy as np
 
 from .chaos import hash_bytes
